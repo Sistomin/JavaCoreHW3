@@ -124,8 +124,8 @@ public class Main {
         System.out.println(workers2[3].getCurrentTask());
         // Создаём нового менеджера
         Manager superTop = new Manager("superTop", "Sky", "Fox",
-                "CEO", "+7-911-111-33-33", 7000,
-                LocalDate.of(1970, 9, 25));
+                "Moremost", "+7-966-66-66-999", 15000,
+                LocalDate.of(1720, 3, 20));
         // Новый менеджер ставить задачу сотруднику
         superTop.assign(new Task("Поручение руководителя, купить бумагу в офис."), workers[2]);
         System.out.println("Менеджер " + superTop + "назначил работнику " + workers[2] + "задачу:");
