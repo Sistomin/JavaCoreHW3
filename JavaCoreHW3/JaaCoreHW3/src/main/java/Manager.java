@@ -14,10 +14,10 @@ public class Manager extends Worker {
         super(surname, name, middleName, position, phoneNumber, salary, birthDate);
     }
 
-    // Метод повышения зарплаты
+    //region Метод повышения зарплаты
     public static void addSalaryFromManager(Worker[] workers, int age, int addAmont){
         for (Worker worker : workers) {
-            if (!(worker instanceof Manager)) {
+            if (!(worker instanceof Manager)) { // всем кроме руководителя
                 if (worker.getAge() >= age) {
                     worker.setSalary(worker.getSalary() + addAmont);
                 }
@@ -25,4 +25,16 @@ public class Manager extends Worker {
         }
         System.out.println("Зарплата повышена успешно!!! Для роботников старше " + age + " на " + addAmont);
     }
+    //endregion
+
+    //region Task3 перегрузка метода assign(...) для руководителя
+
+    public void assign(Task task, Worker worker) {
+
+        // Назначение задачи, от руководителя работнику
+        worker.assign(task);
+    }
+    //endregion
+
+
 }

@@ -12,9 +12,7 @@
 //метода assign(...) и брать задачу себе.
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Main {
@@ -40,37 +38,46 @@ public class Main {
         //Опишите класс руководителя (Manager), наследник от сотрудника.
         //Перенесите статический метод повышения зарплаты в класс руководителя, модифицируйте метод таким образом,
         //чтобы он мог поднять заработную плату всем, кроме руководителей.
-        //(Класс создал, метод перенес, так же модифичировал метод)
+        //(Класс создал, метод перенес, так же модифицировал метод)
 
         // Сoздал массив workers2 из 5 работников + Manager
         Worker[] workers2 = {
-                new Worker("Petrov", "Petr", "Petrovich", "manager",
+                new Worker("Petrov", "Petr", "Petrovich", "Ingenere",
                         "+7-999-001-02-02", 200, LocalDate.of(1979, 11, 17)),
                 new Worker("Ivanov", "Ivan", "Ivanovich", "Backender",
                         "89990010203", 100, LocalDate.of(1975, 10, 17)),
-                new Manager("Zaicev", "Jliy", "Semenovich", "Manager",
-                        "+7-990-000-0000", 500, LocalDate.of(1977, 02, 01)),
                 new Worker("Sidorov", "Sergey", "Ivanovich", "Tehnik",
                         "+79990010299", 50, LocalDate.of(1965, 12, 01)),
                 new Worker("Warner", "Esj", "Ivanovich", "Backender",
                         "+7999001111", 150, LocalDate.of(1995, 07, 27)),
                 new Worker("Rudenko", "Anton", "Pavlovich", "IT-derektor",
-                        "+7-990-000-0101", 500, LocalDate.of(1978, 02, 01))
+                        "+7-990-000-0101", 500, LocalDate.of(1978, 02, 01)),
+                //task2 создал руководителя
+                new Manager("Topmanager", "Top", "Topovich", "Manager",
+                        "+7-990-000-0000", 500, LocalDate.of(1977, 02, 01))
 
         };
         // Проверка Task2:
-        System.out.println("Task2: ");
+        System.out.println("-----Task2-----".repeat(5));
         System.out.println("Выводим информациюю о работниках и Менеджере до повышения ЗП:");
         System.out.println(Arrays.toString(workers2)); //Выводим информациюю о работниках и Менеджере до повышения ЗП
         Manager.addSalaryFromManager(workers2, 45, 100); //вызываем метод повышения ЗП от Менеджера
         System.out.println("Выводим информациюю о работниках и Менеджере после повышения ЗП:");
         System.out.println(Arrays.toString(workers2));
         System.out.println("-----".repeat(5));
+        //endregion
 
+        //region Task1
+        System.out.println("-----Task1-----".repeat(5));
+        // Компоратор(сортировка) по фамилии
+        System.out.println("Task1 - Сортировка по фамилии: ");
+        List<Worker> workerList2 = Arrays.asList(workers2);
+        workerList2.sort(new WorkerFullNameComparator());
+        System.out.println(workerList2);
         //endregion
 
 
-
+/*
         //region Блок проверок(вывод в консоль) c семинара:
 
         System.out.println("-----".repeat(5));
@@ -99,16 +106,6 @@ public class Main {
         workerList.sort(new WorkerSalaryComparator());
         System.out.println(workerList);
 
-        //Вывод Task1
-        System.out.println("-----".repeat(5));
-        // Компоратор(сортировка) по фамилии
-        System.out.println("Task1 - Сортировка по фамилии: ");
-        List<Worker> workerList2 = Arrays.asList(workers2);
-        workerList2.sort(new WorkerFullNameComparator());
-        System.out.println(workerList2);
-
-
-
 
         System.out.println("-----".repeat(5));
         // Компоратор(сортировка) по возрасту вариант 2
@@ -116,6 +113,23 @@ public class Main {
         workerList.sort((o1, o2) -> o1.getAge() - o2.getAge());
         System.out.println(workerList);
 
+        //endregion
+*/
+
+        //region Task3
+        System.out.println("-----Task3-----".repeat(5));
+        // Сотрудник берет на себя задачу
+        workers2[3].assign(new Task("Подготовить годовой план по продажам апельсинов на 2025 год."));
+        System.out.println("Сотрудник " + workers2[3] + "взял на себя задачу в работу:");
+        System.out.println(workers2[3].getCurrentTask());
+        // Создаём нового менеджера
+        Manager superTop = new Manager("superTop", "Sky", "Fox",
+                "CEO", "+7-911-111-33-33", 7000,
+                LocalDate.of(1970, 9, 25));
+        // Новый менеджер ставить задачу сотруднику
+        superTop.assign(new Task("Поручение руководителя, купить бумагу в офис."), workers[2]);
+        System.out.println("Менеджер " + superTop + "назначил работнику " + workers[2] + "задачу:");
+        System.out.println(workers[2].getCurrentTask());
         //endregion
 
 
@@ -140,7 +154,5 @@ public class Main {
         return sumSalary / array.length;
     }
     //endregion
-
-
 
 }

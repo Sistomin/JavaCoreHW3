@@ -136,4 +136,24 @@ public class Worker implements Comparable<Worker> {
         return this.getAge() - o.getAge();
     }
     //endregion
+
+    //region Task3 Метод назначения на себя задачи
+    private Task currentTask;
+
+    public Task getCurrentTask() {
+        return currentTask;
+    }
+    //endregion
+
+    //region Task3 Метод закрепления задачи и сохранения исполнителя
+    public void assign(Task task) {
+
+        // Закрепление задачи за работником
+        this.currentTask = task;
+
+        // Сохранение исполнителя в задаче
+        task.setExecutorTask(this);
+    }
+    //endregion
+
 }
